@@ -11,6 +11,12 @@ exports.submitLead = function (req, res, next) {
     return models.Lead.create({
         email: req.body.leadEmail,
     }).then(lead => {
-        res.redirect("/")//redirect back to the landing page once submitted
+        res.redirect("/leads")//redirect back to the landing page once submitted
+    })
+}
+
+exports.showLeads = function (req, res, next) {
+    models.Lead.findAll().then(leads => {
+        res.render('landing', { title: 'Express', leads: leads });
     })
 }
